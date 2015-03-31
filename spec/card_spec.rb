@@ -52,7 +52,7 @@ module Trello
         result = JSON.generate(cards_details.first.merge(payload.merge(idList: lists_details.first['id'])))
 
         expected_payload = {name: "Test Card", desc: nil, idList: "abcdef123456789123456789",
-                            idMembers: nil, labels: nil, pos: nil }
+                            idMembers: nil, labels: nil, pos: nil, due: nil }
 
         client.should_receive(:post).with("/cards", expected_payload).and_return result
 
@@ -123,6 +123,10 @@ module Trello
 
       it "gets its pos" do
         card.pos.should_not be_nil
+      end
+
+      it "gets its due" do
+        card.due.should_not be_nil
       end
     end
 
